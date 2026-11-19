@@ -128,7 +128,7 @@ if [ "$(uname -s)" = "Linux" ]; then
   PORT_ARGS=""
 else
   NETWORK_ARGS=""
-  PORT_ARGS="-p 5900:5900 -p 6080:6080"
+  PORT_ARGS="-p 5900:5900 -p 6080:6080 -p 6006:6006"
 fi
 
 if $USE_GPU; then

@@ -83,6 +83,9 @@ def main():
 
     env_cfg = registry.get_default_config(ENV_NAME)
     apply_mjx_overrides_to_playground_cfg(env_cfg)
+    #env_cfg.reward_config.scales.box_target = 40.0
+    #env_cfg.reward_config.scales.robot_target_qpos = 30.0
+    env_cfg.reward_config.scales.box_target = 4.0
     raw_env = registry.load(ENV_NAME, config=env_cfg)
 
     brax_env = wrapper_torch.RSLRLBraxWrapper(
@@ -101,6 +104,8 @@ def main():
     cfg_dict["seed"] = args.seed
     cfg_dict["max_iterations"] = args.max_iters
     cfg_dict["save_interval"] = args.save_interval
+
+    print(f"learning_rate:{cfg_dict['algorithm']['learning_rate']}")
 
     # Сохраняем конфиг до создания runner'а (construct_algorithm делает pop на actor/critic)
     config_path = os.path.join(log_dir, "config.json")
